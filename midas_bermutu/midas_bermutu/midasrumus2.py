@@ -24,6 +24,34 @@ class DepthEstimator(Node):
         self.declare_parameter('fy2', 1050.00)
         self.declare_parameter('cx2', 960)
         self.declare_parameter('cy2', 540)
+        self.declare_parameter('fx3', 1050.00)
+        self.declare_parameter('fy3', 1050.00)
+        self.declare_parameter('cx3', 960)
+        self.declare_parameter('cy3', 540)
+        self.declare_parameter('fx4', 1050.00)
+        self.declare_parameter('fy4', 1050.00)
+        self.declare_parameter('cx4', 960)
+        self.declare_parameter('cy4', 540)
+        self.declare_parameter('fx5', 1050.00)
+        self.declare_parameter('fy5', 1050.00)
+        self.declare_parameter('cx5', 960)
+        self.declare_parameter('cy5', 540)
+        self.declare_parameter('fx6', 1050.00)
+        self.declare_parameter('fy6', 1050.00)
+        self.declare_parameter('cx6', 960)
+        self.declare_parameter('cy6', 540)
+        self.declare_parameter('fx7', 1050.00)
+        self.declare_parameter('fy7', 1050.00)
+        self.declare_parameter('cx7', 960)
+        self.declare_parameter('cy7', 540)
+        self.declare_parameter('fx8', 1050.00)
+        self.declare_parameter('fy8', 1050.00)
+        self.declare_parameter('cx8', 960)
+        self.declare_parameter('cy8', 540)
+        self.declare_parameter('fx9', 1050.00)
+        self.declare_parameter('fy9', 1050.00)
+        self.declare_parameter('cx9', 960)
+        self.declare_parameter('cy9', 540)
         self.fx = self.get_parameter('fx').value
         self.fy = self.get_parameter('fy').value
         self.cx = self.get_parameter('cx').value
@@ -36,6 +64,34 @@ class DepthEstimator(Node):
         self.fy2 = self.get_parameter('fy2').value
         self.cx2 = self.get_parameter('cx2').value
         self.cy2 = self.get_parameter('cy2').value
+        self.fx3 = self.get_parameter('fx3').value
+        self.fy3 = self.get_parameter('fy3').value
+        self.cx3 = self.get_parameter('cx3').value
+        self.cy3 = self.get_parameter('cy3').value
+        self.fx4 = self.get_parameter('fx4').value
+        self.fy4 = self.get_parameter('fy4').value
+        self.cx4 = self.get_parameter('cx4').value
+        self.cy4 = self.get_parameter('cy4').value
+        self.fx5 = self.get_parameter('fx5').value
+        self.fy5 = self.get_parameter('fy5').value
+        self.cx5 = self.get_parameter('cx5').value
+        self.cy5 = self.get_parameter('cy5').value
+        self.fx6 = self.get_parameter('fx6').value
+        self.fy6 = self.get_parameter('fy6').value
+        self.cx6 = self.get_parameter('cx6').value
+        self.cy6 = self.get_parameter('cy6').value
+        self.fx7 = self.get_parameter('fx7').value
+        self.fy7 = self.get_parameter('fy7').value
+        self.cx7 = self.get_parameter('cx7').value
+        self.cy7 = self.get_parameter('cy7').value
+        self.fx8 = self.get_parameter('fx8').value
+        self.fy8 = self.get_parameter('fy8').value
+        self.cx8 = self.get_parameter('cx8').value
+        self.cy8 = self.get_parameter('cy8').value
+        self.fx9 = self.get_parameter('fx9').value
+        self.fy9 = self.get_parameter('fy9').value
+        self.cx9 = self.get_parameter('cx9').value
+        self.cy9 = self.get_parameter('cy9').value
 
         # Initialize CvBridge
         self.bridge = CvBridge()
@@ -53,8 +109,8 @@ class DepthEstimator(Node):
         )
 
         # Initialize bounding box variables
-        self.bbx = self.bby = self.bbw = self.bbh = self.bbx1 = self.bby1 = self.bbw1 = self.bbh1 = self.bbx2 = self.bby2 = self.bbw2 = self.bbh2 = -1
-        self.last_z = self.last_z1 = self.last_z2 = 0
+        self.bbx = self.bby = self.bbw = self.bbh = self.bbx1 = self.bby1 = self.bbw1 = self.bbh1 = self.bbx2 = self.bby2 = self.bbw2 = self.bbh2 = self.bbx3 = self.bby3 = self.bbw3 = self.bbh3 = self.bbx4 = self.bby4 = se lf.bbw4 = self.bbh4 = self.bbx5 = self.bby5 = self.bbw5 = self.bbh5 =self.bbx6 = self.bby6 = self.bbw6 = self.bbh6 = self.bbx7 = self.bby7 = self.bbw7 = self.bbh7 = self.bbx8 = self.bby8 = self.bbw8 = self.bbh8 = self.bbx9 = self.bby9 = self.bbw9 = self.bbh9 = -1
+        self.last_z = self.last_z1 = self.last_z2 = self.last_z3 = self.last_z4 = self.last_z5 = self.last_z6 = self.last_z7 = self.last_z8 = self.last_z9 = 0 
 
         # Download the MiDaS model
         self.midas = torch.hub.load('intel-isl/MiDaS', 'MiDaS_small')
@@ -80,6 +136,41 @@ class DepthEstimator(Node):
                 self.bbw1 = bbox.xmax - bbox.xmin
                 self.bbh1 = bbox.ymax - bbox.ymin
             elif bbox.class_id == "B_Pole":
+                self.bbx2 = bbox.xmin
+                self.bby2 = bbox.ymin
+                self.bbw2 = bbox.xmax - bbox.xmin
+                self.bbh2 = bbox.ymax - bbox.ymin
+            elif bbox.class_id == "GA_L_Cross":
+                self.bbx2 = bbox.xmin
+                self.bby2 = bbox.ymin
+                self.bbw2 = bbox.xmax - bbox.xmin
+                self.bbh2 = bbox.ymax - bbox.ymin
+            elif bbox.class_id == "PA_L_Cross":
+                self.bbx2 = bbox.xmin
+                self.bby2 = bbox.ymin
+                self.bbw2 = bbox.xmax - bbox.xmin
+                self.bbh2 = bbox.ymax - bbox.ymin
+            elif bbox.class_id == "X_Cross":
+                self.bbx2 = bbox.xmin
+                self.bby2 = bbox.ymin
+                self.bbw2 = bbox.xmax - bbox.xmin
+                self.bbh2 = bbox.ymax - bbox.ymin
+            elif bbox.class_id == "Goal":
+                self.bbx2 = bbox.xmin
+                self.bby2 = bbox.ymin
+                self.bbw2 = bbox.xmax - bbox.xmin
+                self.bbh2 = bbox.ymax - bbox.ymin
+            elif bbox.class_id == "Pinalti":
+                self.bbx2 = bbox.xmin
+                self.bby2 = bbox.ymin
+                self.bbw2 = bbox.xmax - bbox.xmin
+                self.bbh2 = bbox.ymax - bbox.ymin
+            elif bbox.class_id == "T_Corner":
+                self.bbx2 = bbox.xmin
+                self.bby2 = bbox.ymin
+                self.bbw2 = bbox.xmax - bbox.xmin
+                self.bbh2 = bbox.ymax - bbox.ymin
+            elif bbox.class_id == "Corner":
                 self.bbx2 = bbox.xmin
                 self.bby2 = bbox.ymin
                 self.bbw2 = bbox.xmax - bbox.xmin
