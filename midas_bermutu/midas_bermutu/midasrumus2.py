@@ -35,12 +35,12 @@ class DepthEstimator(Node):
         self.ball_bbox = None
         self.t_pole_bbox = None
         self.b_pole_bbox = None
-	    self.ga_l_cross_bbox = None
-	    self.pa_l_cross_bbox = None
-	    self.x_cross_bbox = None
-	    self.goal_bbox = None
-	    self.pinalti_bbox = None
-	    self.t_corner_bbox = None
+	self.ga_l_cross_bbox = None
+	self.pa_l_cross_bbox = None
+	self.x_cross_bbox = None
+	self.goal_bbox = None
+	self.pinalti_bbox = None
+	self.t_corner_bbox = None
         self.corner_bbox = None
 
         # Initialize MIDAS model
@@ -59,17 +59,17 @@ class DepthEstimator(Node):
                 self.t_pole_bbox = bbox
             elif bbox.Class == "B_Pole":
                 self.b_pole_bbox = bbox
-	        elif bbox.Class == "GA_L_Cross":
+	    elif bbox.Class == "GA_L_Cross":
                 self.ga_l_cross_bbox = bbox
-	        elif bbox.Class == "PA_L_Cross":
+	    elif bbox.Class == "PA_L_Cross":
                 self.pa_l_cross_bbox = bbox
-	        elif bbox.Class == "X_Cross":
+	    elif bbox.Class == "X_Cross":
                 self.x_cross_bbox = bbox
-	        elif bbox.Class == "Goal":
+	    elif bbox.Class == "Goal":
                 self.goal_bbox = bbox
-	        elif bbox.Class == "Pinalti":
+	    elif bbox.Class == "Pinalti":
                 self.pinalti_bbox = bbox
-	        elif bbox.Class == "T_Corner":
+	    elif bbox.Class == "T_Corner":
                 self.t_corner_bbox = bbox
             elif bbox.Class == "Corner":
                 self.corner_bbox = bbox
