@@ -201,15 +201,15 @@ class DepthEstimator(Node):
 
         # Process bounding boxes and compute distance
         for (bx, by, bw, bh, z_var, fx_var, fy_var, cx_var, cy_var) in [(x, y, w, h, self.last_z, self.fx, self.fy, self.cx, self.cy),
-                                                                          (x1, y1, w1, h1, self.last_z1, self.fx1, self.fy1, self.cx1, self.cy1),
-                                                                          (x2, y2, w2, h2, self.last_z2, self.fx2, self.fy2, self.cx2, self.cy2),
-                                                                          (x3, y3, w3, h3, self.last_z3, self.fx3, self.fy3, self.cx3, self.cy3),
-                                                                          (x4, y4, w4, h4, self.last_z4, self.fx4, self.fy4, self.cx4, self.cy4),
-                                                                          (x5, y5, w5, h5, self.last_z5, self.fx5, self.fy5, self.cx5, self.cy5),
-                                                                          (x6, y6, w6, h6, self.last_z6, self.fx6, self.fy6, self.cx6, self.cy6),
-                                                                          (x7, y7, w7, h7, self.last_z7, self.fx7, self.fy7, self.cx7, self.cy7),
-                                                                          (x8, y8, w8, h8, self.last_z8, self.fx8, self.fy8, self.cx8, self.cy8),
-                                                                          (x9, y9, w9, h9, self.last_z9, self.fx9, self.fy9, self.cx9, self.cy9)]:
+                                                                        (x1, y1, w1, h1, self.last_z1, self.fx1, self.fy1, self.cx1, self.cy1),
+                                                                        (x2, y2, w2, h2, self.last_z2, self.fx2, self.fy2, self.cx2, self.cy2),
+                                                                        (x3, y3, w3, h3, self.last_z3, self.fx3, self.fy3, self.cx3, self.cy3),
+                                                                        (x4, y4, w4, h4, self.last_z4, self.fx4, self.fy4, self.cx4, self.cy4),
+                                                                        (x5, y5, w5, h5, self.last_z5, self.fx5, self.fy5, self.cx5, self.cy5),
+                                                                        (x6, y6, w6, h6, self.last_z6, self.fx6, self.fy6, self.cx6, self.cy6),
+                                                                        (x7, y7, w7, h7, self.last_z7, self.fx7, self.fy7, self.cx7, self.cy7),
+                                                                        (x8, y8, w8, h8, self.last_z8, self.fx8, self.fy8, self.cx8, self.cy8),
+                                                                        (x9, y9, w9, h9, self.last_z9, self.fx9, self.fy9, self.cx9, self.cy9)]:
             if bx != -1 and by != -1:
                 depth = depth_map[int((by + bh / 2)), int((bx + bw / 2))]
                 if depth >= 0:
