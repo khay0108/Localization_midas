@@ -24,19 +24,19 @@ class DepthEstimator(Node):
         self.declare_parameter('fy2', 1050.00)
         self.declare_parameter('cx2', 960)
         self.declare_parameter('cy2', 540)
-self.declare_parameter('fx3', 1050.00)
+        self.declare_parameter('fx3', 1050.00)
         self.declare_parameter('fy3', 1050.00)
         self.declare_parameter('cx3', 960)
         self.declare_parameter('cy3', 540)
-self.declare_parameter('fx4', 1050.00)
+        self.declare_parameter('fx4', 1050.00)
         self.declare_parameter('fy4', 1050.00)
         self.declare_parameter('cx4', 960)
         self.declare_parameter('cy4', 540)
-self.declare_parameter('fx5', 1050.00)
+        self.declare_parameter('fx5', 1050.00)
         self.declare_parameter('fy5', 1050.00)
         self.declare_parameter('cx5', 960)
         self.declare_parameter('cy5', 540)
-self.declare_parameter('fx6', 1050.00)
+        self.declare_parameter('fx6', 1050.00)
         self.declare_parameter('fy6', 1050.00)
         self.declare_parameter('cx6', 960)
         self.declare_parameter('cy6', 540)
@@ -53,22 +53,22 @@ self.declare_parameter('fx6', 1050.00)
         self.fy2 = self.get_parameter('fy2').value
         self.cx2 = self.get_parameter('cx2').value
         self.cy2 = self.get_parameter('cy2').value
-self.fx = self.get_parameter('fx3').value
-        self.fy = self.get_parameter('fy3').value
-        self.cx = self.get_parameter('cx3').value
-        self.cy = self.get_parameter('cy3').value
-self.fx = self.get_parameter('fx4').value
-        self.fy = self.get_parameter('fy4').value
-        self.cx = self.get_parameter('cx4').value
-        self.cy = self.get_parameter('cy4').value
-self.fx = self.get_parameter('fx5').value
-        self.fy = self.get_parameter('fy5').value
-        self.cx = self.get_parameter('cx5').value
-        self.cy = self.get_parameter('cy5').value
-self.fx = self.get_parameter('fx6').value
-        self.fy = self.get_parameter('fy6').value
-        self.cx = self.get_parameter('cx6').value
-        self.cy = self.get_parameter('cy6').value
+        self.fx3 = self.get_parameter('fx3').value
+        self.fy3 = self.get_parameter('fy3').value
+        self.cx3 = self.get_parameter('cx3').value
+        self.cy3 = self.get_parameter('cy3').value
+        self.fx4 = self.get_parameter('fx4').value
+        self.fy4 = self.get_parameter('fy4').value
+        self.cx4 = self.get_parameter('cx4').value
+        self.cy4 = self.get_parameter('cy4').value
+        self.fx5 = self.get_parameter('fx5').value
+        self.fy5 = self.get_parameter('fy5').value
+        self.cx5 = self.get_parameter('cx5').value
+        self.cy5 = self.get_parameter('cy5').value
+        self.fx6 = self.get_parameter('fx6').value
+        self.fy6 = self.get_parameter('fy6').value
+        self.cx6 = self.get_parameter('cx6').value
+        self.cy6 = self.get_parameter('cy6').value
 
         # Initialize CvBridge
         self.bridge = CvBridge()
@@ -117,22 +117,22 @@ self.fx = self.get_parameter('fx6').value
                 self.bby2 = bbox.ymin
                 self.bbw2 = bbox.xmax - bbox.xmin
                 self.bbh2 = bbox.ymax - bbox.ymin
-elif bbox.class_id == "X_Cross":
+            elif bbox.class_id == "X_Cross":
                 self.bbx3 = bbox.xmin
                 self.bby3 = bbox.ymin
                 self.bbw3 = bbox.xmax - bbox.xmin
                 self.bbh3 = bbox.ymax - bbox.ymin
-elif bbox.class_id == "Corner":
+            elif bbox.class_id == "Corner":
                 self.bbx4 = bbox.xmin
                 self.bby4 = bbox.ymin
                 self.bbw4 = bbox.xmax - bbox.xmin
                 self.bbh4 = bbox.ymax - bbox.ymin
-elif bbox.class_id == "Robot":
+            elif bbox.class_id == "Robot":
                 self.bbx5 = bbox.xmin
                 self.bby5 = bbox.ymin
                 self.bbw5 = bbox.xmax - bbox.xmin
                 self.bbh5 = bbox.ymax - bbox.ymin
-elif bbox.class_id == "Goal":
+            elif bbox.class_id == "Goal":
                 self.bbx6 = bbox.xmin
                 self.bby6 = bbox.ymin
                 self.bbw6 = bbox.xmax - bbox.xmin
@@ -165,10 +165,10 @@ elif bbox.class_id == "Goal":
         for bbox_data in [(self.bbx, self.bby, self.bbw, self.bbh, self.fx, self.fy, self.cx, self.cy),
                           (self.bbx1, self.bby1, self.bbw1, self.bbh1, self.fx1, self.fy1, self.cx1, self.cy1),
                           (self.bbx2, self.bby2, self.bbw2, self.bbh2, self.fx2, self.fy2, self.cx2, self.cy2),
-(self.bbx3, self.bby3, self.bbw3, self.bbh3, self.fx3, self.fy3, self.cx3, self.cy3),
-(self.bbx4, self.bby4, self.bbw4, self.bbh4, self.fx4, self.fy4, self.cx4, self.cy4),
-(self.bbx5, self.bby5, self.bbw5, self.bbh5, self.fx5, self.fy5, self.cx5, self.cy5),
-(self.bbx6, self.bby6, self.bbw6, self.bbh6, self.fx6, self.fy6, self.cx6, self.cy6)]:
+                          (self.bbx3, self.bby3, self.bbw3, self.bbh3, self.fx3, self.fy3, self.cx3, self.cy3),
+                          (self.bbx4, self.bby4, self.bbw4, self.bbh4, self.fx4, self.fy4, self.cx4, self.cy4),
+                          (self.bbx5, self.bby5, self.bbw5, self.bbh5, self.fx5, self.fy5, self.cx5, self.cy5),
+                          (self.bbx6, self.bby6, self.bbw6, self.bbh6, self.fx6, self.fy6, self.cx6, self.cy6)]:
             x, y, w, h, fx, fy, cx, cy = bbox_data
             # Compute center point of the bounding box
             cx = (x + w) / 2
@@ -225,10 +225,10 @@ elif bbox.class_id == "Goal":
         self.bbx, self.bby, self.bbw, self.bbh = -1, -1, -1, -1
         self.bbx1, self.bby1, self.bbw1, self.bbh1 = -1, -1, -1, -1
         self.bbx2, self.bby2, self.bbw2, self.bbh2 = -1, -1, -1, -1
-self.bbx3, self.bby3, self.bbw3, self.bbh3 = -1, -1, -1, -1
-self.bbx4, self.bby4, self.bbw4, self.bbh4 = -1, -1, -1, -1
-self.bbx5, self.bby5, self.bbw5, self.bbh5 = -1, -1, -1, -1
-self.bbx6, self.bby6, self.bbw6, self.bbh6 = -1, -1, -1, -1
+        self.bbx3, self.bby3, self.bbw3, self.bbh3 = -1, -1, -1, -1
+        self.bbx4, self.bby4, self.bbw4, self.bbh4 = -1, -1, -1, -1
+        self.bbx5, self.bby5, self.bbw5, self.bbh5 = -1, -1, -1, -1
+        self.bbx6, self.bby6, self.bbw6, self.bbh6 = -1, -1, -1, -1
 
 
 def main(args=None):
